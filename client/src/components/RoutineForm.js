@@ -9,6 +9,7 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 import * as yup from 'yup'
+import planService from '../services/plans'
 
 const validationSchema = yup.object({
   name: yup.string().required().max(25),
@@ -33,12 +34,11 @@ const MyTextField = ({ placeholder, ...props }) => {
   )
 }
 const RoutineForm = ({ plans, setPlans }) => {
-  const addPlan = (data) => {
+  const addPlan = async (data) => {
     const workoutPlan = {
       ...data,
-      id: Math.random() * Math.floor(100),
     }
-    setPlans(plans.concat(workoutPlan))
+    await planService.create(workoutPlan)
   }
   return (
     <div>
@@ -60,7 +60,6 @@ const RoutineForm = ({ plans, setPlans }) => {
         // }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true)
-          //make async call
           console.log('submit', data)
           addPlan(data)
           setSubmitting(false)

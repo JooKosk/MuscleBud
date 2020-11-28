@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import RoutineForm from './components/RoutineForm'
 import PlanInfo from './components/PlanInfo'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Plans from './components/Plans'
+import planService from './services/plans'
 import Container from '@material-ui/core/Container'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const App = () => {
   const [plans, setPlans] = useState([])
-  console.log(plans)
+
+  useEffect(() => {
+    planService.getAll().then((plans) => setPlans(plans))
+  }, [])
+
   return (
     <Container>
       <Router>

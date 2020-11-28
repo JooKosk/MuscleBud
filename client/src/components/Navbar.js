@@ -9,13 +9,13 @@ const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Button color="inherit" component={Link} to="/">
-          home
+          Home
         </Button>
         <Button color="inherit" component={Link} to="/planner">
-          notes
+          Workout Planner
         </Button>
         <Button color="inherit" component={Link} to="/plans">
-          users
+          Workout Plans
         </Button>
       </Toolbar>
     </AppBar>

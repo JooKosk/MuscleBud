@@ -8,30 +8,9 @@ import TableHead from '@material-ui/core/TableHead'
 import Paper from '@material-ui/core/Paper'
 import { useParams } from 'react-router-dom'
 
-const plans = [
-  {
-    name: 'Abcrusher 5000',
-    author: 'Arnold',
-    workoutType: 'Full body',
-    equipment: ['Barbells', 'Tightrope'],
-    workoutDays: 5,
-    description: 'Five day split adnandadnaawdnwadnwadnwadwnadwandawdwa',
-    id: 1,
-  },
-  {
-    name: 'Abcrusher 7000',
-    author: 'Mike',
-    workoutType: 'Upper body',
-    equipment: ['Shorts', 'Bar'],
-    workoutDays: 3,
-    description: 'Three day split dfgdfdfdfdfdfdfdfdfdfdfdfdfdfdfd',
-    id: 2,
-  },
-]
-
-const PlanInfo = () => {
+const PlanInfo = ({ plans }) => {
   const id = useParams().id
-  const plan = plans.find((p) => p.id === Number(id))
+  const plan = plans.find((p) => p.id === id)
 
   if (!plan) {
     return null

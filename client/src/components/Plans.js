@@ -1,39 +1,38 @@
 import React from 'react'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableSortLabel,
+  TableRow,
+  Paper,
+} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-const plans = [
-  {
-    name: 'Abcrusher 5000',
-    author: 'Arnold',
-    workoutType: 'Full',
-    equipment: ['Barbells', 'Tightrope'],
-    workoutDays: 5,
-    description: 'Five day split adnandadnaawdnwadnwadnwadwnadwandawdwa',
-    id: 1,
-  },
-  {
-    name: 'Abcrusher 7000',
-    author: 'Mike',
-    workoutType: 'Upper',
-    equipment: ['Shorts', 'Bar'],
-    workoutDays: 3,
-    description: 'Three day split dfgdfdfdfdfdfdfdfdfdfdfdfdfdfdfd',
-    id: 2,
-  },
-]
-
-const Plans = () => {
+const Plans = ({ plans }) => {
   return (
     <div>
       <h2>Plans</h2>
       <TableContainer component={Paper}>
         <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">
+                <strong>Plan name</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Author</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Workout type</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Days / week</strong>
+              </TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
             {plans.map((p) => (
               <TableRow key={p.id}>
@@ -41,6 +40,8 @@ const Plans = () => {
                   <Link to={`/plans/${p.id}`}>{p.name}</Link>
                 </TableCell>
                 <TableCell>{p.author}</TableCell>
+                <TableCell>{p.workoutType}</TableCell>
+                <TableCell>{p.workoutDays}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/workouts/
+Content-Type: application/json
+
+{
+  "name": "Morning run",
+  "description": "8 km run in the neighbourhood, feeling great!",
+  "date": "Sat Nov 28 2020 16:41:58 GMT+0200 (Eastern European Standard Time)"
+}
