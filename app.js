@@ -6,6 +6,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const plansRouter = require('./server/controllers/plans')
 const workoutsRouter = require('./server/controllers/workouts')
+const usersRouter = require('./server/controllers/users')
 const config = require('./server/utils/config')
 const logger = require('./server/utils/logger')
 
@@ -22,5 +23,6 @@ app.use(express.json())
 
 app.use('/api/plans', plansRouter)
 app.use('/api/workouts', workoutsRouter)
+app.use('/api/users', usersRouter)
 
 module.exports = app

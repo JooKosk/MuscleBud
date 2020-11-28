@@ -6,6 +6,10 @@ const workoutSchema = mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   date: Date,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 })
 
 workoutSchema.set('toJSON', {
