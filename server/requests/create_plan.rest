@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/plans/
+Content-Type: application/json
+
+{
+  "name": "Abcrusher 3000",
+  "author": "Joe doe",
+  "workoutType": "Full body",
+  "equipment": ["Shorts", "Tightrope"],
+  "workoutDays": 3,
+  "description": "Three day split"
+}
