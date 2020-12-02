@@ -1,7 +1,11 @@
 import React from 'react'
 
-const Home = () => {
-  return <div>Hello</div>
+const Home = ({ workouts }) => {
+  return (
+    <div>
+      <h1>Your MuscleBud feed</h1>
+    </div>
+  )
 }
 
 export default Home

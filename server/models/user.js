@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema({
       ref: 'Workout',
     },
   ],
+  plans: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Plan',
+    },
+  ],
 })
 
 userSchema.plugin(uniqueValidator)

@@ -1,8 +1,9 @@
 POST http://localhost:3001/api/workouts/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlcnJha2F5dHRhamEiLCJpZCI6IjVmYzc4MjQ0YzA2NzM1MTQxZWFhYjA5NSIsImlhdCI6MTYwNjkyMTEzOH0.NBI5YdE4qPxUopfusNWzi0E2_wr5P87VxJ1ZNvB7dSk
 
 {
   "name": "Morning run",
   "description": "8 km run in the neighbourhood, feeling great!",
-  "date": "Sat Nov 28 2020 16:41:58 GMT+0200 (Eastern European Standard Time)"
+  "userId": "5fc78244c06735141eaab095"
 }

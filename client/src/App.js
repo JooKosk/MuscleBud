@@ -5,14 +5,17 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Plans from './components/Plans'
 import planService from './services/plans'
+import workoutService from './services/workouts'
 import Container from '@material-ui/core/Container'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const App = () => {
   const [plans, setPlans] = useState([])
+  const [workouts, setWorkouts] = useState([])
 
   useEffect(() => {
     planService.getAll().then((plans) => setPlans(plans))
+    workoutService.getAll().then((workouts) => setWorkouts(workouts))
   }, [])
 
   return (
@@ -32,7 +35,7 @@ const App = () => {
             <Plans plans={plans} />
           </Route>
           <Route path="/">
-            <Home />
+            <Home workouts={workouts} />
           </Route>
         </Switch>
       </Router>
