@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
 const Navbar = () => {
+  const logout = () => {
+    window.localStorage.removeItem('User')
+  }
   return (
     <AppBar position="static">
       <Toolbar>
@@ -16,6 +19,9 @@ const Navbar = () => {
         </Button>
         <Button color="inherit" component={Link} to="/plans">
           Workout Plans
+        </Button>
+        <Button color="inherit" onClick={logout}>
+          Logout
         </Button>
       </Toolbar>
     </AppBar>
