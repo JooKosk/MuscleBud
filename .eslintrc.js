@@ -12,5 +12,6 @@ module.exports = {
     semi: ['error', 'never'],
     'max-len': [1, 200],
     'no-console': 0,
+    'no-anonymous-default-export': 0,
   },
 }

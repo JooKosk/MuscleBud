@@ -4,9 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
-const Navbar = () => {
+const Navbar = ({ setUser }) => {
   const logout = () => {
     window.localStorage.removeItem('User')
+    setUser(null)
   }
   return (
     <AppBar position="static">

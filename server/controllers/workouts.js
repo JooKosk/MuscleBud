@@ -19,7 +19,7 @@ workoutsRouter.post('/', async (req, res) => {
   const workout = new Workout({
     name: body.name,
     description: body.description,
-    date: new Date(),
+    date: new Date.UTC(),
     // eslint-disable-next-line no-underscore-dangle
     user: user._id,
   })

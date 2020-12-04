@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import RoutineForm from './components/RoutineForm'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 import PlanInfo from './components/PlanInfo'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Plans from './components/Plans'
 import planService from './services/plans'
 import workoutService from './services/workouts'
-import Container from '@material-ui/core/Container'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Container, Button } from '@material-ui/core'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -29,13 +30,29 @@ const App = () => {
   }, [])
 
   if (user === null) {
-    return <LoginForm setUser={setUser} />
+    return (
+      <div>
+        <Router>
+          <Switch>
+            <Route path="/register">
+              <RegisterForm />
+            </Route>
+            <Route path="/">
+              <LoginForm setUser={setUser} />
+              <Button color="inherit" component={Link} to="/register">
+                Sign up
+              </Button>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    )
   }
   return (
     <Container>
       <Router>
         <div>
-          <Navbar />
+          <Navbar setUser={setUser} />
         </div>
         <Switch>
           <Route path="/planner">
