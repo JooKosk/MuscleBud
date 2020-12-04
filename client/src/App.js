@@ -39,9 +39,6 @@ const App = () => {
             </Route>
             <Route path="/">
               <LoginForm setUser={setUser} />
-              <Button color="inherit" component={Link} to="/register">
-                Sign up
-              </Button>
             </Route>
           </Switch>
         </Router>

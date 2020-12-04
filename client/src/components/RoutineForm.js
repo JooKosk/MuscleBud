@@ -65,14 +65,7 @@ const RoutineForm = ({ plans, setPlans }) => {
           setSubmitting(false)
         }}
       >
-        {({
-          values,
-          errors,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        }) => (
+        {({ values, errors, isSubmitting }) => (
           <Form>
             <div>
               <FormLabel component="legend">Workout type:</FormLabel>

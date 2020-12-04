@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core'
 
 const Home = ({ workouts }) => {
-  console.log(workouts)
   return (
     <div>
       <h1>Your MuscleBud feed</h1>
