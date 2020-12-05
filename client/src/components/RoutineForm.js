@@ -21,12 +21,13 @@ const MyRadioButton = ({ label, ...props }) => {
   return <FormControlLabel {...field} control={<Radio />} label={label} />
 }
 
-export const MyTextField = ({ placeholder, ...props }) => {
+export const MyTextField = ({ placeholder, type, ...props }) => {
   const [field, meta] = useField(props)
   const errorText = meta.error && meta.touched ? meta.error : ''
   return (
     <TextField
       placeholder={placeholder}
+      type={type}
       {...field}
       helperText={errorText}
       error={!!errorText}

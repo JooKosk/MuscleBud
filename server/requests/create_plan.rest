@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/plans/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlcnJha2F5dHRhamEiLCJpZCI6IjVmYzc4MjQ0YzA2NzM1MTQxZWFhYjA5NSIsImlhdCI6MTYwNjkyMTEzOH0.NBI5YdE4qPxUopfusNWzi0E2_wr5P87VxJ1ZNvB7dSk
+Authorization: bearer
 
 {
   "name": "Abcrusher 3000",

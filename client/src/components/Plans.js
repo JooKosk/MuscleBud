@@ -5,7 +5,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableSortLabel,
   TableRow,
   Paper,
 } from '@material-ui/core'

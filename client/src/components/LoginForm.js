@@ -48,7 +48,7 @@ const LoginForm = ({ setUser }) => {
                 <MyTextField
                   placeholder="Password"
                   name="password"
-                  type="input"
+                  type="password"
                 />
               </div>
               <StyledButton disabled={isSubmitting} type="submit">

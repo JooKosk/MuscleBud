@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/workouts/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFibWFuMzAwMCIsImlkIjoiNWZjYTFjMDM5ZjNhZGI2YjlhODRjZTBlIiwiaWF0IjoxNjA3MDgyNzk3fQ.NSCzHPCwtFCKDTLiaRMDm4iVJ0LOuryv8uNf6qN570Q
+Authorization: 
 
 {
   "name": "Late night gym session",

@@ -5,9 +5,7 @@ const User = require('../models/user')
 
 loginRouter.post('/', async (req, res) => {
   const { body } = req
-  console.log(body)
   const user = await User.findOne({ username: body.username })
-  console.log(user)
   const correctPassword =
     user === null
       ? false
