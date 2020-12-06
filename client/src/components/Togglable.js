@@ -13,7 +13,7 @@ const Togglable = (props) => {
   return (
     <div>
       <div style={hide}>
-        <button onClick={toggleSwitch}>{props.buttonLabel}</button>
+        <button onClick={toggleSwitch}></button>
       </div>
       <div style={show}>
         {props.children}

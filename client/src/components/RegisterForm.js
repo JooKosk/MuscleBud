@@ -3,7 +3,7 @@ import { register } from '../services/register'
 import { Formik, Form } from 'formik'
 import { MyTextField } from './RoutineForm'
 import { Alert } from '@material-ui/lab'
-import { StyledButton, SignUpButton, LoginWrapper } from './styling'
+import { Button } from '@material-ui/core'
 import * as yup from 'yup'
 import { Link, useHistory } from 'react-router-dom'
 const validationSchema = yup.object({
@@ -54,7 +54,7 @@ const RegisterForm = () => {
     */
   }
   return (
-    <LoginWrapper>
+    <div>
       <h1>Sign up for MuscleBud</h1>
       <div>
         {alertMessage && (
@@ -105,17 +105,17 @@ const RegisterForm = () => {
                   type="password"
                 />
               </div>
-              <StyledButton component={Link} to="/">
+              <Button component={Link} to="/">
                 {'<-'} Back
-              </StyledButton>
-              <SignUpButton disabled={isSubmitting} type="submit">
+              </Button>
+              <Button disabled={isSubmitting} type="submit">
                 Sign up
-              </SignUpButton>
+              </Button>
             </Form>
           )
         }}
       </Formik>
-    </LoginWrapper>
+    </div>
   )
 }
 

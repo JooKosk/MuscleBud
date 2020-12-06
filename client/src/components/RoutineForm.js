@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import * as yup from 'yup'
 import planService from '../services/plans'
+import { routineFormStyles, routineFormContStyles } from './styling'
 
 const validationSchema = yup.object({
   name: yup.string().required().max(25),
@@ -35,6 +36,8 @@ export const MyTextField = ({ placeholder, type, ...props }) => {
   )
 }
 const RoutineForm = ({ plans, setPlans }) => {
+  const contClass = routineFormContStyles()
+  const formClass = routineFormStyles()
   const addPlan = async (data) => {
     const workoutPlan = {
       ...data,
@@ -42,113 +45,108 @@ const RoutineForm = ({ plans, setPlans }) => {
     await planService.create(workoutPlan)
   }
   return (
-    <div>
-      <h2>Post your workout plan here!</h2>
-      <Formik
-        initialValues={{
-          name: '',
-          author: '',
-          workoutType: '',
-          equipment: [''],
-          workoutDays: '',
-          description: '',
-        }}
-        validationSchema={validationSchema}
-        // validate={(values) => {
-        //   const errors = {}
-        //
-        //   return errors
-        // }}
-        onSubmit={(data, { setSubmitting }) => {
-          setSubmitting(true)
-          console.log('submit', data)
-          addPlan(data)
-          setSubmitting(false)
-        }}
-      >
-        {({ values, errors, isSubmitting }) => (
-          <Form>
-            <div>
-              <FormLabel component="legend">Workout type:</FormLabel>
-              <RadioGroup>
-                <MyRadioButton
-                  name="workoutType"
-                  type="radio"
-                  value="Full body"
-                  label="Full body"
+    <div className={contClass.root}>
+      <div className={formClass.root}>
+        <h2>Post your workout plan here!</h2>
+        <Formik
+          initialValues={{
+            name: '',
+            author: '',
+            workoutType: '',
+            equipment: [''],
+            workoutDays: '',
+            description: '',
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(data, { setSubmitting }) => {
+            setSubmitting(true)
+            console.log('submit', data)
+            addPlan(data)
+            setSubmitting(false)
+          }}
+        >
+          {({ values, errors, isSubmitting }) => (
+            <Form>
+              <div>
+                <FormLabel component="legend">Workout type:</FormLabel>
+                <RadioGroup>
+                  <MyRadioButton
+                    name="workoutType"
+                    type="radio"
+                    value="Full body"
+                    label="Full body"
+                  />
+                  <MyRadioButton
+                    name="workoutType"
+                    type="radio"
+                    value="Upper body"
+                    label="Upper body"
+                  />
+                  <MyRadioButton
+                    name="workoutType"
+                    type="radio"
+                    value="Lower body"
+                    label="Lowerbody"
+                  />
+                  <MyRadioButton
+                    name="workoutType"
+                    type="radio"
+                    value="Core"
+                    label="Core"
+                  />
+                </RadioGroup>
+              </div>
+              <div>
+                <MyTextField
+                  label="Plan name:"
+                  placeholder="Abcrusher 2000"
+                  name="name"
+                  type="input"
                 />
-                <MyRadioButton
-                  name="workoutType"
-                  type="radio"
-                  value="Upper body"
-                  label="Upper body"
+              </div>
+              <div>
+                <MyTextField
+                  label="Plan author:"
+                  placeholder="Jeremy"
+                  name="author"
+                  type="input"
                 />
-                <MyRadioButton
-                  name="workoutType"
-                  type="radio"
-                  value="Lower body"
-                  label="Lowerbody"
+              </div>
+              <div>
+                <MyTextField
+                  label="Days per week:"
+                  placeholder="3"
+                  name="workoutDays"
+                  type="input"
                 />
-                <MyRadioButton
-                  name="workoutType"
-                  type="radio"
-                  value="Core"
-                  label="Core"
+              </div>
+              <div>
+                <MyTextField
+                  label="Equipment:"
+                  placeholder="Barbells"
+                  name="equipment"
+                  type="input"
                 />
-              </RadioGroup>
-            </div>
-            <div>
-              <MyTextField
-                label="Plan name:"
-                placeholder="Abcrusher 2000"
-                name="name"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField
-                label="Plan author:"
-                placeholder="Jeremy"
-                name="author"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField
-                label="Days per week:"
-                placeholder="3"
-                name="workoutDays"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField
-                label="Equipment:"
-                placeholder="Barbells"
-                name="equipment"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField
-                style={{ paddingTop: 10 }}
-                label="Description:"
-                placeholder="Three day split.."
-                name="description"
-                type="input"
-                multiline
-                rows={4}
-                variant="outlined"
-              />
-            </div>
-            <Button disabled={isSubmitting} type="submit">
-              submit
-            </Button>
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
-          </Form>
-        )}
-      </Formik>
+              </div>
+              <div>
+                <MyTextField
+                  style={{ paddingTop: 10 }}
+                  label="Description:"
+                  placeholder="Three day split.."
+                  name="description"
+                  type="input"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                />
+              </div>
+              <Button disabled={isSubmitting} type="submit">
+                submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   )
 }

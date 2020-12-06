@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { login } from '../services/login'
 import { Formik, Form } from 'formik'
 import { MyTextField } from './RoutineForm'
-import { StyledButton, LoginWrapper } from './styling'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
+import { Alert } from '@material-ui/lab'
+import { Button } from '@material-ui/core'
 
 const validationSchema = yup.object({
   username: yup.string().required().min(3),
@@ -12,19 +13,34 @@ const validationSchema = yup.object({
 })
 
 const LoginForm = ({ setUser }) => {
+  const [message, setMessage] = useState(null)
   const handleLogin = async ({ username, password }) => {
-    const user = await login({
-      username,
-      password,
-    })
-    window.localStorage.setItem('User', JSON.stringify(user))
-    setUser(user)
+    try {
+      const user = await login({
+        username,
+        password,
+      })
+      window.localStorage.setItem('User', JSON.stringify(user))
+      setUser(user)
+    } catch (e) {
+      setMessage('Wrong username or password')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    }
   }
 
   return (
-    <LoginWrapper>
+    <div>
       <h1>Welcome to MuscleBud!</h1>
-      <h2>Log in to view your feed</h2>
+      <h2>Login to view your feed</h2>
+      <div>
+        {message && (
+          <Alert style={{ margin: '1rem' }} severity="error">
+            {message}
+          </Alert>
+        )}
+      </div>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values, { setSubmitting }) => {
@@ -51,51 +67,17 @@ const LoginForm = ({ setUser }) => {
                   type="password"
                 />
               </div>
-              <StyledButton disabled={isSubmitting} type="submit">
+              <Button disabled={isSubmitting} type="submit">
                 Login
-              </StyledButton>
-              <StyledButton component={Link} to="/register">
+              </Button>
+              <Button component={Link} to="/register">
                 Sign up
-              </StyledButton>
+              </Button>
             </Form>
           )
         }}
       </Formik>
-    </LoginWrapper>
+    </div>
   )
 }
-/*
- <Formik>
-      <Form
-        onSubmit={async (e) => {
-          e.preventDefault()
-          try {
-            const user = await login({
-              username,
-              password,
-            })
-
-            window.localStorage.setItem('User', JSON.stringify(user))
-            setUser(user)
-          } catch (e) {}
-        }}
-      >
-        <div>
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <input
-          type="text"
-          value={password}
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">login</button>
-      </Form>
-    </Formik>
-    */
 export default LoginForm

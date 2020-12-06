@@ -8,11 +8,13 @@ import {
   TableHead,
   Paper,
 } from '@material-ui/core'
+import { homeStyles } from './styling'
 
 const Home = ({ workouts }) => {
+  const classes = homeStyles()
   return (
     <div>
-      <h1>Your MuscleBud feed</h1>
+      <h1 className={classes.root}>Your MuscleBud feed</h1>
       {workouts.map((w) => (
         <TableContainer
           style={{ margin: 20, border: 'solid' }}

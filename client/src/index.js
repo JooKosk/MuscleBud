@@ -1,18 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { createGlobalStyle } from 'styled-components'
+import './index.css'
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: 'Roboto';
-  }
-`
-
-ReactDOM.render(
-  <React.StrictMode>
-    <GlobalStyle />
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))

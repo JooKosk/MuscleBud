@@ -8,14 +8,14 @@ import Home from './components/Home'
 import Plans from './components/Plans'
 import planService from './services/plans'
 import workoutService from './services/workouts'
-import { Container, Button } from '@material-ui/core'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { ThemeProvider } from '@material-ui/core/styles'
+import Theme from './components/styling'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const App = () => {
   const [user, setUser] = useState(null)
   const [plans, setPlans] = useState([])
   const [workouts, setWorkouts] = useState([])
-
   useEffect(() => {
     planService.getAll().then((plans) => setPlans(plans))
     workoutService.getAll().then((workouts) => setWorkouts(workouts))
@@ -29,28 +29,28 @@ const App = () => {
     }
   }, [])
 
-  if (user === null) {
+  if (!user) {
     return (
-      <div>
-        <Router>
-          <Switch>
-            <Route path="/register">
-              <RegisterForm />
-            </Route>
-            <Route path="/">
-              <LoginForm setUser={setUser} />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      <ThemeProvider theme={Theme}>
+        <div>
+          <Router>
+            <Switch>
+              <Route path="/register">
+                <RegisterForm />
+              </Route>
+              <Route path="/">
+                <LoginForm setUser={setUser} />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      </ThemeProvider>
     )
   }
   return (
-    <Container>
+    <ThemeProvider theme={Theme}>
       <Router>
-        <div>
-          <Navbar setUser={setUser} />
-        </div>
+        <Navbar setUser={setUser} />
         <Switch>
           <Route path="/planner">
             <RoutineForm plans={plans} setPlans={setPlans} />
@@ -66,7 +66,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </Container>
+    </ThemeProvider>
   )
 }
 

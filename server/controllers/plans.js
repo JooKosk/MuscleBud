@@ -8,6 +8,7 @@ plansRouter.get('/', async (req, res) => {
   res.json(plans.map((p) => p.toJSON()))
 })
 
+// eslint-disable-next-line consistent-return
 plansRouter.post('/', async (req, res) => {
   const { body } = req
   const decodedToken = jwt.verify(req.token, process.env.SECRET)
