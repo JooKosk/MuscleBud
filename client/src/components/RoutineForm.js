@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import * as yup from 'yup'
 import planService from '../services/plans'
-import { routineFormStyles, routineFormContStyles } from './styling'
+import { containerStyles } from './styling'
 
 const validationSchema = yup.object({
   name: yup.string().required().max(25),
@@ -36,8 +36,7 @@ export const MyTextField = ({ placeholder, type, ...props }) => {
   )
 }
 const RoutineForm = ({ plans, setPlans }) => {
-  const contClass = routineFormContStyles()
-  const formClass = routineFormStyles()
+  const classes = containerStyles()
   const addPlan = async (data) => {
     const workoutPlan = {
       ...data,
@@ -45,8 +44,8 @@ const RoutineForm = ({ plans, setPlans }) => {
     await planService.create(workoutPlan)
   }
   return (
-    <div className={contClass.root}>
-      <div className={formClass.root}>
+    <div className={classes.root}>
+      <div className={classes.children}>
         <h2>Post your workout plan here!</h2>
         <Formik
           initialValues={{
