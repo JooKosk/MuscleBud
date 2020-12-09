@@ -9,10 +9,11 @@ import {
   Paper,
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { CenteredContainer } from './styling'
 
 const Plans = ({ plans }) => {
   return (
-    <div>
+    <CenteredContainer>
       <h2>Plans</h2>
       <TableContainer component={Paper}>
         <Table>
@@ -46,7 +47,7 @@ const Plans = ({ plans }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </CenteredContainer>
   )
 }
 

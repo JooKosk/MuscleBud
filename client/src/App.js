@@ -26,6 +26,7 @@ const App = () => {
     if (loggedUser) {
       const user = JSON.parse(loggedUser)
       setUser(user)
+      planService.setToken(user.token)
     }
   }, [])
 

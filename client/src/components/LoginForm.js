@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import { login } from '../services/login'
 import { Formik, Form } from 'formik'
-import { MyTextField } from './RoutineForm'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
 import { Alert } from '@material-ui/lab'
-import { Button } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import {
-  containerStyles,
-  SignUpDiv,
-  buttonStyles,
+  CenteredContainer,
+  OptionsDiv,
+  LoginButton,
   FormContainer,
+  MyTextField,
 } from './styling'
 
 const validationSchema = yup.object({
@@ -20,8 +19,6 @@ const validationSchema = yup.object({
 })
 
 const LoginForm = ({ setUser }) => {
-  const classes = containerStyles()
-  const btnClasses = buttonStyles()
   const [message, setMessage] = useState(null)
   const handleLogin = async ({ username, password }) => {
     try {
@@ -40,7 +37,7 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <div className={classes.root}>
+    <CenteredContainer>
       <h1>Sign in to MuscleBud</h1>
       <div>
         {message && (
@@ -72,15 +69,11 @@ const LoginForm = ({ setUser }) => {
                   name="password"
                   type="password"
                 />
-                <Button
-                  classes={{ root: btnClasses.root }}
-                  disabled={isSubmitting}
-                  type="submit"
-                >
+                <LoginButton disabled={isSubmitting} type="submit">
                   Log in
-                </Button>
+                </LoginButton>
               </FormContainer>
-              <SignUpDiv>
+              <OptionsDiv>
                 <p>
                   Not yet registered?{' '}
                   <Link
@@ -90,12 +83,12 @@ const LoginForm = ({ setUser }) => {
                     Create an account.
                   </Link>
                 </p>
-              </SignUpDiv>
+              </OptionsDiv>
             </Form>
           )
         }}
       </Formik>
-    </div>
+    </CenteredContainer>
   )
 }
 export default LoginForm

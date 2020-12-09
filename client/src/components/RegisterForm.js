@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { register } from '../services/register'
 import { Formik, Form } from 'formik'
-import { MyTextField } from './RoutineForm'
 import { Alert } from '@material-ui/lab'
-import { Button } from '@material-ui/core'
 import * as yup from 'yup'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import {
+  CenteredContainer,
+  BlueButton,
+  FormContainer,
+  MyTextField,
+} from './styling'
+
 const validationSchema = yup.object({
   name: yup
     .string()
@@ -49,13 +54,10 @@ const RegisterForm = () => {
         setAlertMessage(null)
       }, 6000)
     }
-    /*
-    
-    */
   }
   return (
-    <div>
-      <h1>Sign up for MuscleBud</h1>
+    <CenteredContainer>
+      <h1>Create your Musclebud account</h1>
       <div>
         {alertMessage && (
           <Alert style={{ margin: '1rem' }} severity={alertStatus}>
@@ -81,41 +83,24 @@ const RegisterForm = () => {
           const { isSubmitting, handleSubmit } = props
           return (
             <Form onSubmit={handleSubmit}>
-              <div>
-                <MyTextField placeholder="Name" name="name" type="input" />
-              </div>
-              <div>
+              <CenteredContainer>
+                <MyTextField label="First name" name="name" type="input" />
+                <MyTextField label="Username" name="username" type="input" />
+                <MyTextField label="Password" name="password" type="password" />
                 <MyTextField
-                  placeholder="Username"
-                  name="username"
-                  type="input"
-                />
-              </div>
-              <div>
-                <MyTextField
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                />
-              </div>
-              <div>
-                <MyTextField
-                  placeholder="Confirm password"
+                  label="Confirm password"
                   name="confirmPassword"
                   type="password"
                 />
-              </div>
-              <Button component={Link} to="/">
-                {'<-'} Back
-              </Button>
-              <Button disabled={isSubmitting} type="submit">
-                Sign up
-              </Button>
+                <BlueButton disabled={isSubmitting} type="submit">
+                  Create Account
+                </BlueButton>
+              </CenteredContainer>
             </Form>
           )
         }}
       </Formik>
-    </div>
+    </CenteredContainer>
   )
 }
 
