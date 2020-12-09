@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
 import { login } from '../services/login'
-import { Formik, Form } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
-import { Alert } from '@material-ui/lab'
-import blue from '@material-ui/core/colors/blue'
 import {
-  CenteredContainer,
-  OptionsDiv,
-  LoginButton,
-  FormContainer,
   MyTextField,
+  FormContainer,
+  FormItemContainer,
+  LoginButton,
 } from './styling'
-
 const validationSchema = yup.object({
   username: yup.string().required().min(3),
   password: yup.string().required(),
@@ -37,18 +33,12 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <CenteredContainer>
+    <FormContainer>
       <h1>Sign in to MuscleBud</h1>
-      <div>
-        {message && (
-          <Alert style={{ margin: '1rem' }} severity="error">
-            {message}
-          </Alert>
-        )}
-      </div>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values, { setSubmitting }) => {
+          console.log('submitting', values)
           handleLogin(values)
           setSubmitting(false)
         }}
@@ -58,37 +48,29 @@ const LoginForm = ({ setUser }) => {
           const { isSubmitting, handleSubmit } = props
           return (
             <Form onSubmit={handleSubmit}>
-              <FormContainer>
-                <MyTextField
-                  placeholder="Username"
-                  name="username"
-                  type="input"
-                />
-                <MyTextField
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                />
+              <FormItemContainer>
+                <MyTextField label="username" name="username" type="text" />
+                <MyTextField label="password" name="password" type="password" />
                 <LoginButton disabled={isSubmitting} type="submit">
-                  Log in
+                  LOG IN
                 </LoginButton>
-              </FormContainer>
-              <OptionsDiv>
-                <p>
-                  Not yet registered?{' '}
-                  <Link
-                    style={{ textDecoration: 'none', color: blue[800] }}
-                    to="/register"
-                  >
-                    Create an account.
-                  </Link>
-                </p>
-              </OptionsDiv>
+                <div>
+                  <p>
+                    Not yet registered?{' '}
+                    <Link
+                      style={{ textDecoration: 'none', color: 'blue' }}
+                      to="/register"
+                    >
+                      Create an account.
+                    </Link>
+                  </p>
+                </div>
+              </FormItemContainer>
             </Form>
           )
         }}
       </Formik>
-    </CenteredContainer>
+    </FormContainer>
   )
 }
 export default LoginForm

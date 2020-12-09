@@ -13,7 +13,7 @@ import { CenteredContainer } from './styling'
 
 const Plans = ({ plans }) => {
   return (
-    <CenteredContainer>
+    <div>
       <h2>Plans</h2>
       <TableContainer component={Paper}>
         <Table>
@@ -47,7 +47,7 @@ const Plans = ({ plans }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </CenteredContainer>
+    </div>
   )
 }
 
