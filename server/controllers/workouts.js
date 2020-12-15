@@ -17,15 +17,15 @@ workoutsRouter.post('/', async (req, res) => {
   const user = await User.findById(decodedToken.id)
 
   const workout = new Workout({
-    name: body.name,
+    name: body.workoutName,
+    type: body.workoutType,
+    date: new Date(),
+    duration: body.duration,
     description: body.description,
-    date: new Date.UTC(),
-    // eslint-disable-next-line no-underscore-dangle
     user: user._id,
   })
 
   const savedWorkout = await workout.save()
-  // eslint-disable-next-line no-underscore-dangle
   user.workouts = user.workouts.concat(savedWorkout._id)
   await user.save()
 

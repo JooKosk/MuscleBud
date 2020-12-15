@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { login } from '../services/login'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
 import {
-  MyTextField,
-  FormContainer,
-  FormItemContainer,
+  LoginTextField,
+  FormWrapper,
+  CenteredForm,
   LoginButton,
 } from './styling'
 const validationSchema = yup.object({
@@ -33,7 +33,7 @@ const LoginForm = ({ setUser }) => {
   }
 
   return (
-    <FormContainer>
+    <FormWrapper>
       <h1>Sign in to MuscleBud</h1>
       <Formik
         initialValues={{ username: '', password: '' }}
@@ -47,30 +47,30 @@ const LoginForm = ({ setUser }) => {
         {(props) => {
           const { isSubmitting, handleSubmit } = props
           return (
-            <Form onSubmit={handleSubmit}>
-              <FormItemContainer>
-                <MyTextField label="username" name="username" type="text" />
-                <MyTextField label="password" name="password" type="password" />
-                <LoginButton disabled={isSubmitting} type="submit">
-                  LOG IN
-                </LoginButton>
-                <div>
-                  <p>
-                    Not yet registered?{' '}
-                    <Link
-                      style={{ textDecoration: 'none', color: 'blue' }}
-                      to="/register"
-                    >
-                      Create an account.
-                    </Link>
-                  </p>
-                </div>
-              </FormItemContainer>
-            </Form>
+            <CenteredForm onSubmit={handleSubmit}>
+              <LoginTextField label="Username" name="username" type="text" />
+              <LoginTextField
+                label="Password"
+                name="password"
+                type="password"
+              />
+              <LoginButton disabled={isSubmitting} type="submit">
+                Log in
+              </LoginButton>
+              <p>
+                Not yet registered?{' '}
+                <Link
+                  style={{ textDecoration: 'none', color: 'blue' }}
+                  to="/register"
+                >
+                  Create an account.
+                </Link>
+              </p>
+            </CenteredForm>
           )
         }}
       </Formik>
-    </FormContainer>
+    </FormWrapper>
   )
 }
 export default LoginForm

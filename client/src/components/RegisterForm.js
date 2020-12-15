@@ -3,23 +3,22 @@ import { register } from '../services/register'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 import { useHistory } from 'react-router-dom'
-import { MyTextField } from './styling'
+import { MyTextField, FormWrapper, CenteredForm, LoginButton } from './styling'
 
 const validationSchema = yup.object({
   name: yup
     .string()
-    .label('Name')
-    .required()
+    .required('First name is required')
     .min(2, 'Must be at least 2 characters long'),
-  username: yup.string().required().min(3),
+  username: yup.string().required('Username is required').min(3),
   password: yup
     .string()
-    .required('Enter your username')
+    .required('Password is required')
     .min(4, 'Password must have more than 4 characters'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], "Passwords don't match")
-    .required('Confirm your password'),
+    .required('Confirm password'),
 })
 
 const RegisterForm = () => {
@@ -50,7 +49,7 @@ const RegisterForm = () => {
     }
   }
   return (
-    <div>
+    <FormWrapper>
       <h1>Create your Musclebud account</h1>
       <Formik
         initialValues={{
@@ -69,23 +68,23 @@ const RegisterForm = () => {
         {(props) => {
           const { isSubmitting, handleSubmit } = props
           return (
-            <Form onSubmit={handleSubmit}>
-              <MyTextField label="name" name="name" type="text" />
-              <MyTextField label="username" name="username" type="text" />
-              <MyTextField label="password" name="password" type="password" />
+            <CenteredForm onSubmit={handleSubmit}>
+              <MyTextField label="First name" name="name" type="text" />
+              <MyTextField label="Username" name="username" type="text" />
+              <MyTextField label="Password" name="password" type="password" />
               <MyTextField
                 label="Confirm password"
                 name="confirmPassword"
                 type="password"
               />
-              <button disabled={isSubmitting} type="submit">
+              <LoginButton disabled={isSubmitting} type="submit">
                 Create Account
-              </button>
-            </Form>
+              </LoginButton>
+            </CenteredForm>
           )
         }}
       </Formik>
-    </div>
+    </FormWrapper>
   )
 }
 

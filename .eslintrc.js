@@ -15,5 +15,6 @@ module.exports = {
     'no-anonymous-default-export': 0,
     'no-underscore-dangle': 'off',
     'operator-linebreak': 'off',
+    'no-param-reassign': 'off',
   },
 }

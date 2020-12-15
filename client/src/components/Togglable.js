@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { BlueButton } from './styling'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
@@ -13,11 +14,11 @@ const Togglable = (props) => {
   return (
     <div>
       <div style={hide}>
-        <button onClick={toggleSwitch}></button>
+        <BlueButton onClick={toggleSwitch}>{props.buttonLabel}</BlueButton>
       </div>
       <div style={show}>
         {props.children}
-        <button onClick={toggleSwitch}>Hide</button>
+        <BlueButton onClick={toggleSwitch}>Hide</BlueButton>
       </div>
     </div>
   )

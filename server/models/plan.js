@@ -1,20 +1,24 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose')
 
 const planSchema = mongoose.Schema({
-  name: { type: String, required: true },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  workoutType: String,
-  equipment: [
-    {
-      type: String,
-    },
-  ],
-  workoutDays: Number,
+  summary: {
+    goal: String,
+    workoutType: { type: String, required: true },
+    level: String,
+    duration: { type: String, required: true },
+    workoutDays: Number,
+    timePerWorkout: Number,
+    equipment: [
+      {
+        type: String,
+      },
+    ],
+    author: { type: String, required: true },
+  },
   description: { type: String, required: true },
 })
 

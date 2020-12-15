@@ -1,5 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import {
+  NavbarWrapper,
+  NavButton,
+  DropDownContent,
+  DropDownMenu,
+  DropDownLink,
+} from './styling'
 
 const Navbar = ({ setUser }) => {
   const logout = () => {
@@ -7,23 +16,30 @@ const Navbar = ({ setUser }) => {
     setUser(null)
   }
   return (
-    <div>
-      <button
-        size="small"
-        color="inherit"
-        background="inherit"
-        component={Link}
-        to="/"
-      >
-        Home
-      </button>
-      <button size="small" color="inherit">
-        Training plans
-      </button>
-      <button size="small" color="inherit" onClick={logout}>
-        Logout
-      </button>
-    </div>
+    <NavbarWrapper>
+      <div>
+        <Link to="/">
+          <NavButton> Home</NavButton>
+        </Link>
+        <DropDownMenu>
+          <NavButton>
+            {' '}
+            <FontAwesomeIcon style={{ marginRight: 5 }} icon={faCaretDown} />
+            Training
+          </NavButton>
+          <DropDownContent>
+            <DropDownLink to="/planner">Training plans</DropDownLink>
+            <DropDownLink to="/calendar">Calendar</DropDownLink>
+          </DropDownContent>
+        </DropDownMenu>
+      </div>
+      <div>
+        <NavButton onClick={logout}>
+          Sign out
+          <FontAwesomeIcon style={{ marginLeft: 5 }} icon={faArrowRight} />
+        </NavButton>
+      </div>
+    </NavbarWrapper>
   )
 }
 

@@ -1,9 +1,11 @@
 POST http://localhost:3001/api/workouts/
 Content-Type: application/json
-Authorization: 
+Authorization:
 
 {
   "name": "Late night gym session",
-  "description": "Rough leg day tonight, might have a day off tomorrow.. :D",
-  "userId": "5fca1c039f3adb6b9a84ce0e"
+  "description": "Great workout.. still feeling a bit sore..",
+  "type": "Gym",
+  "duration": 2000,
+  "mood": "Sad"
 }
