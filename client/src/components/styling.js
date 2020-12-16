@@ -223,17 +223,17 @@ export const MyDateField = styled(MyTextField)`
 `
 
 export const LoginTextField = styled(MyTextField)`
-  width: 90%;
+  width: 100%;
 `
 
 export const LoginButton = styled.button`
   background-color: #4caf50;
   color: white;
   width: 100%;
-  margin: 0.6rem;
-  border-radius: 8px;
-  padding: 8px 14px;
-  border: 3px solid #fff;
+  margin: 0.6rem 0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  border: 0px solid #fff;
   font-size: 14px;
   box-sizing: border-box;
   &:hover {
@@ -245,6 +245,18 @@ export const BlueButton = styled.button`
   color: white;
   border-radius: 8px;
   padding: 8px 14px;
+  border: 3px solid #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+  &:hover {
+    background-color: #40739e;
+  }
+`
+export const LikeButton = styled.button`
+  background-color: #487eb0;
+  color: white;
+  border-radius: 8px;
+  padding: 4px 10px;
   border: 3px solid #fff;
   font-size: 14px;
   box-sizing: border-box;
@@ -289,5 +301,29 @@ export const Header = styled.h1`
 export const Styledh2 = styled.h2`
   text-align: center;
 `
-
+export const ErrorWrapper = styled.div`
+  &&& {
+    background-color: #ffffff;
+    border: solid 1px;
+    color: #c23616;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+  }
+`
+export const SuccessWrapper = styled.div`
+  &&& {
+    background: #ffffff;
+    color: #29a329;
+    border: solid 1px;
+    border-style: solid 1px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 8px 14px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+`
 export default LoginButton

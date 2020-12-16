@@ -20,5 +20,13 @@ export const create = async (workoutObject) => {
   return res.data
 }
 
+export const update = async (id, newWorkoutObject) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const res = await axios.put(`${baseUrl}/${id}`, newWorkoutObject, config)
+  return res.data
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, setToken }
+export default { getAll, create, update, setToken }

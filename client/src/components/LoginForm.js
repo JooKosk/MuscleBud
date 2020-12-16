@@ -3,6 +3,7 @@ import { login } from '../services/login'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
+import Alert from './Alert'
 import {
   LoginTextField,
   FormWrapper,
@@ -16,6 +17,7 @@ const validationSchema = yup.object({
 
 const LoginForm = ({ setUser }) => {
   const [message, setMessage] = useState(null)
+  const [alertError, setAlertError] = useState(false)
   const handleLogin = async ({ username, password }) => {
     try {
       const user = await login({
@@ -25,9 +27,11 @@ const LoginForm = ({ setUser }) => {
       window.localStorage.setItem('User', JSON.stringify(user))
       setUser(user)
     } catch (e) {
+      setAlertError(true)
       setMessage('Wrong username or password')
       setTimeout(() => {
         setMessage(null)
+        setAlertError(!alertError)
       }, 5000)
     }
   }
@@ -48,6 +52,7 @@ const LoginForm = ({ setUser }) => {
           const { isSubmitting, handleSubmit } = props
           return (
             <CenteredForm onSubmit={handleSubmit}>
+              <Alert message={message} err={alertError} />
               <LoginTextField label="Username" name="username" type="text" />
               <LoginTextField
                 label="Password"

@@ -4,8 +4,8 @@ const Workout = require('../models/workout')
 const User = require('../models/user')
 
 workoutsRouter.get('/', async (req, res) => {
-  const plans = await Workout.find({}).populate('user', { name: 1 })
-  res.json(plans.map((p) => p.toJSON()))
+  const workouts = await Workout.find({}).populate('user', { name: 1 })
+  res.json(workouts.map((w) => w.toJSON()))
 })
 
 workoutsRouter.post('/', async (req, res) => {
@@ -30,6 +30,25 @@ workoutsRouter.post('/', async (req, res) => {
   await user.save()
 
   res.json(savedWorkout.toJSON())
+})
+
+workoutsRouter.put('/:id', async (req, res) => {
+  const { body } = req
+  const likedBy = await User.findOne({
+    username: body.whoLiked[body.whoLiked.length - 1].username,
+  })
+  const newWorkout = {
+    whoLiked: likedBy,
+  }
+  console.log(newWorkout)
+  const updatedWorkout = await Workout.findByIdAndUpdate(
+    req.params.id,
+    newWorkout,
+    {
+      new: true,
+    }
+  )
+  res.json(updatedWorkout)
 })
 
 module.exports = workoutsRouter

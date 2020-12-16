@@ -65,12 +65,13 @@ const WorkoutForm = () => {
           description: '',
           duration: '',
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log('submitting', values)
           let startTime = new Date(values.endTime).getTime()
           let endTime = new Date(values.startTime).getTime()
           values.duration = workoutTimeToString(endTime, startTime)
           addWorkout(values)
+          resetForm()
           setSubmitting(false)
         }}
         validationSchema={validationSchema}

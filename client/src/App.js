@@ -19,7 +19,6 @@ const App = () => {
   const [plans, setPlans] = useState([])
   const [workouts, setWorkouts] = useState([])
   const [date, setDate] = useState(new Date())
-
   useEffect(() => {
     planService.getAll().then((plans) => setPlans(plans))
     workoutService.getAll().then((workouts) => setWorkouts(workouts))
@@ -70,7 +69,7 @@ const App = () => {
             <Plans plans={plans} />
           </Route>
           <Route path="/">
-            <Home workouts={workouts} />
+            <Home workouts={workouts} user={user} />
             <Footer />
           </Route>
         </Switch>

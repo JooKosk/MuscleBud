@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { register } from '../services/register'
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup'
+import Alert from './Alert'
 import { useHistory } from 'react-router-dom'
 import { MyTextField, FormWrapper, CenteredForm, LoginButton } from './styling'
 
@@ -23,7 +24,7 @@ const validationSchema = yup.object({
 
 const RegisterForm = () => {
   let [alertMessage, setAlertMessage] = useState(null)
-  let [alertStatus, setAlertStatus] = useState('success')
+  let [alertError, setAlertError] = useState(false)
   let history = useHistory()
   const handleRegistration = async ({ name, username, password }) => {
     try {
@@ -33,7 +34,6 @@ const RegisterForm = () => {
         password,
       })
       if (res) {
-        setAlertStatus('success')
         setAlertMessage('Registration succesful! You are being redirected..')
         setTimeout(() => {
           setAlertMessage(null)
@@ -41,9 +41,10 @@ const RegisterForm = () => {
         }, 6000)
       }
     } catch (e) {
-      setAlertStatus('error')
+      setAlertError(true)
       setAlertMessage('That username is already taken..')
       setTimeout(() => {
+        setAlertError(false)
         setAlertMessage(null)
       }, 6000)
     }
@@ -60,7 +61,9 @@ const RegisterForm = () => {
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           handleRegistration(values)
-          resetForm()
+          if (!alertMessage === 'That username is already taken..') {
+            resetForm()
+          }
           setSubmitting(false)
         }}
         validationSchema={validationSchema}
@@ -69,6 +72,7 @@ const RegisterForm = () => {
           const { isSubmitting, handleSubmit } = props
           return (
             <CenteredForm onSubmit={handleSubmit}>
+              <Alert message={alertMessage} err={alertError} />
               <MyTextField label="First name" name="name" type="text" />
               <MyTextField label="Username" name="username" type="text" />
               <MyTextField label="Password" name="password" type="password" />
