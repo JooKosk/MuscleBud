@@ -1,17 +1,18 @@
 # MuscleBud
 
-## MuscleBud is a responsive workout planning web application developed with the MERN stack.
+### Responsive workout planning web application developed with the MERN stack.
 
-## REST API implemented with Node.js supports CRUD operations for users and their workouts.
+### REST API implemented with Node.js supports CRUD operations for users and their workouts.
 
 ### Features:
 
 //WIP
 
 ```
-User registration
-Users can post completed workouts & complete workout plans
-Users can view workouts and plans posted by others
+Registration & authentication with jwt's
+Post completed workouts and complete workout plans
+Like and comment workouts and plans
+View workouts and plans posted by others
 ```
 
 ### Technologies & libraries:
