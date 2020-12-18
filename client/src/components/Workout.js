@@ -1,102 +1,119 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import workoutService from '../services/workouts'
+import { Formik, Form } from 'formik'
+import Togglable from './Togglable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faRunning,
   faClock,
-  faCalendarAlt,
+  faComment,
   faThumbsUp,
+  faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import {
   WorkoutPost,
-  WorkoutHeader,
   FlexWrapper,
-  StyledP,
-  LikeButton,
-} from './styling'
+  CommentWrapper,
+  CommentBody,
+  CommentCount,
+  PostInfo,
+} from '../styling/wrappers'
+import {
+  WorkoutHeader,
+  PostHeader,
+  SpacedText,
+  BlueButton,
+  CommentText,
+  CommentUser,
+  DateText,
+} from '../styling/mixins'
+import { MyBigTextField } from '../styling/forms'
 
-const Workout = ({ workout, user }) => {
-  const [likedBy, setLikedBy] = useState([])
-  console.log(workout.whoLiked)
-  useEffect(() => {
-    setLikedBy(...likedBy, workout.whoLiked)
-  }, [])
-  const likePost = async () => {
-    if (!likedBy.includes(user)) {
-      setLikedBy(...likedBy, user)
-      const likedWorkout = {
-        ...workout,
-        whoLiked: [...likedBy, user],
-      }
-      await workoutService.update(workout.id, likedWorkout)
-    }
+const Workout = ({ workout, user, handleLike }) => {
+  const comments = workout.comments.length === 1 ? 'comment' : 'comments'
+  const addComment = async (props) => {
+    await workoutService.comment(workout.id, props, user)
   }
-
+  const removeWorkout = async () => {
+    await workoutService.remove(workout.id)
+  }
   return (
     <>
       <WorkoutPost key={workout.id}>
-        <WorkoutHeader>{workout.name}</WorkoutHeader>
+        <PostHeader>{workout.user.username}</PostHeader>
+        <DateText>{new Date(workout.date).toDateString()}</DateText>
+        <WorkoutHeader>{workout.name} </WorkoutHeader>
+        <p>{workout.description}</p>
         <FlexWrapper>
           <p>
             {' '}
             <FontAwesomeIcon style={{ marginRight: 5 }} icon={faRunning} />{' '}
             {workout.type}
           </p>
-          <StyledP>
-            <FontAwesomeIcon style={{ marginRight: 5 }} icon={faCalendarAlt} />
-            Date: {new Date(workout.date).toDateString()}
-          </StyledP>
-          <StyledP>
+          <SpacedText>
             {' '}
             <FontAwesomeIcon style={{ marginRight: 5 }} icon={faClock} />
             Duration: {workout.duration}
-          </StyledP>
+          </SpacedText>
         </FlexWrapper>
-        <p>Notes: {workout.description}</p>
-        <p>Posted by: {workout.user.name}</p>
-        <LikeButton onClick={likePost}>
-          <FontAwesomeIcon style={{ marginRight: 5 }} icon={faThumbsUp} />
-          Like{' '}
-        </LikeButton>
-        <p>Liked by:</p>
+        <Togglable
+          icon={
+            <FontAwesomeIcon
+              style={{ marginRight: 5 }}
+              icon={faComment}
+              title="comment"
+            />
+          }
+        >
+          <Formik
+            initialValues={{ comment: '' }}
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              addComment(values.comment)
+              resetForm()
+              setSubmitting(false)
+            }}
+          >
+            {(props) => {
+              const { isSubmitting, handleSubmit } = props
+              return (
+                <Form onSubmit={handleSubmit}>
+                  <MyBigTextField
+                    placeholder="Leave a comment..."
+                    name="comment"
+                  />
+                  <BlueButton disabled={isSubmitting} type="submit">
+                    Comment
+                  </BlueButton>
+                </Form>
+              )
+            }}
+          </Formik>
+        </Togglable>
+        <PostInfo>
+          <p>{workout.likes} likes</p>
+          <SpacedText>
+            {workout.comments.length} {comments}
+          </SpacedText>
+        </PostInfo>
+        {workout.comments.map((c) => (
+          <CommentWrapper key={c.id}>
+            <CommentBody>
+              <CommentUser>
+                <b>{c.user.username}</b>
+              </CommentUser>
+              <CommentText key={c.id}>{c.content}</CommentText>
+            </CommentBody>
+          </CommentWrapper>
+        ))}
+        <BlueButton onClick={() => handleLike(workout.id)}>Like</BlueButton>
       </WorkoutPost>
     </>
   )
 }
-
-export default Workout
-
 /*
- <WorkoutPost key={w.id}>
-              <WorkoutHeader>{w.name}</WorkoutHeader>
-              <FlexWrapper>
-                <p>
-                  {' '}
-                  <FontAwesomeIcon
-                    style={{ marginRight: 5 }}
-                    icon={faRunning}
-                  />{' '}
-                  {w.type}
-                </p>
-                <StyledP>
-                  <FontAwesomeIcon
-                    style={{ marginRight: 5 }}
-                    icon={faCalendarAlt}
-                  />
-                  Date: {new Date(w.date).toDateString()}
-                </StyledP>
-                <StyledP>
-                  {' '}
-                  <FontAwesomeIcon style={{ marginRight: 5 }} icon={faClock} />
-                  Duration: {w.duration}
-                </StyledP>
-              </FlexWrapper>
-              <p>Notes: {w.description}</p>
-              <p>Posted by: {w.user.name}</p>
-              <LikeButton>
-                <FontAwesomeIcon style={{ marginRight: 5 }} icon={faThumbsUp} />
-                Like{' '}
-              </LikeButton>
-            </WorkoutPost>
-          ))}
-          */
+<RemoveButton>
+          <FontAwesomeIcon icon={faTrashAlt} onClick={removeWorkout} />
+        </RemoveButton>
+        {new Date(c.date).toDateString()}
+        */
+export default Workout

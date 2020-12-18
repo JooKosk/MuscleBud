@@ -4,12 +4,9 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
 import Alert from './Alert'
-import {
-  LoginTextField,
-  FormWrapper,
-  CenteredForm,
-  LoginButton,
-} from './styling'
+import { FormWrapper, CenteredForm, LoginTextField } from '../styling/forms'
+import { LoginButton } from '../styling/mixins'
+
 const validationSchema = yup.object({
   username: yup.string().required().min(3),
   password: yup.string().required(),
@@ -42,7 +39,6 @@ const LoginForm = ({ setUser }) => {
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('submitting', values)
           handleLogin(values)
           setSubmitting(false)
         }}

@@ -4,7 +4,8 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import Alert from './Alert'
 import { useHistory } from 'react-router-dom'
-import { MyTextField, FormWrapper, CenteredForm, LoginButton } from './styling'
+import { LoginButton } from '../styling/mixins'
+import { MyTextField, FormWrapper, RegForm } from '../styling/forms'
 
 const validationSchema = yup.object({
   name: yup
@@ -34,7 +35,7 @@ const RegisterForm = () => {
         password,
       })
       if (res) {
-        setAlertMessage('Registration succesful! You are being redirected..')
+        setAlertMessage('Registration succesful! Redirecting...')
         setTimeout(() => {
           setAlertMessage(null)
           history.push('/')
@@ -42,7 +43,7 @@ const RegisterForm = () => {
       }
     } catch (e) {
       setAlertError(true)
-      setAlertMessage('That username is already taken..')
+      setAlertMessage('That username is already taken...')
       setTimeout(() => {
         setAlertError(false)
         setAlertMessage(null)
@@ -71,7 +72,7 @@ const RegisterForm = () => {
         {(props) => {
           const { isSubmitting, handleSubmit } = props
           return (
-            <CenteredForm onSubmit={handleSubmit}>
+            <RegForm onSubmit={handleSubmit}>
               <Alert message={alertMessage} err={alertError} />
               <MyTextField label="First name" name="name" type="text" />
               <MyTextField label="Username" name="username" type="text" />
@@ -84,7 +85,7 @@ const RegisterForm = () => {
               <LoginButton disabled={isSubmitting} type="submit">
                 Create Account
               </LoginButton>
-            </CenteredForm>
+            </RegForm>
           )
         }}
       </Formik>

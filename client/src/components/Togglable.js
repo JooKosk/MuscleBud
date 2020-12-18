@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { BlueButton } from './styling'
+import { BlueButton } from '../styling/mixins'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
-
   const hide = { display: visible ? 'none' : '' }
   const show = { display: visible ? '' : 'none' }
 
@@ -12,15 +11,17 @@ const Togglable = (props) => {
   }
 
   return (
-    <div>
+    <>
       <div style={hide}>
-        <BlueButton onClick={toggleSwitch}>{props.buttonLabel}</BlueButton>
+        <BlueButton title={props.title} onClick={toggleSwitch}>
+          {props.icon} {props.buttonLabel}
+        </BlueButton>
       </div>
       <div style={show}>
         {props.children}
         <BlueButton onClick={toggleSwitch}>Hide</BlueButton>
       </div>
-    </div>
+    </>
   )
 }
 

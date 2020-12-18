@@ -20,13 +20,32 @@ export const create = async (workoutObject) => {
   return res.data
 }
 
-export const update = async (id, newWorkoutObject) => {
+const update = async (workoutObject) => {
+  console.log(workoutObject)
   const config = {
     headers: { Authorization: token },
   }
-  const res = await axios.put(`${baseUrl}/${id}`, newWorkoutObject, config)
+  const res = await axios.put(
+    `${baseUrl}/${workoutObject.id}`,
+    workoutObject,
+    config
+  )
+  return res.data
+}
+
+const comment = async (id, comment, user) => {
+  const commentContent = { content: comment, user: user }
+  const res = await axios.post(`${baseUrl}/${id}/comments`, commentContent)
+  return res.data
+}
+
+const remove = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const res = await axios.delete(`${baseUrl}/${id}`, config)
   return res.data
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, create, update, setToken }
+export default { getAll, create, update, setToken, comment, remove }

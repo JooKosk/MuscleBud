@@ -12,7 +12,7 @@ import workoutService from './services/workouts'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { GlobalStyle } from './components/styling'
+import { GlobalStyle } from './styling/global'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -34,9 +34,17 @@ const App = () => {
     }
   }, [])
 
+  const handleLike = async (id) => {
+    const WorkoutToLike = workouts.find((w) => w.id === id)
+    const updatedWorkout = { ...WorkoutToLike, likes: WorkoutToLike.likes + 1 }
+    await workoutService.update(updatedWorkout)
+    setWorkouts(workouts.map((w) => (w.id === id ? updatedWorkout : w)))
+  }
+
   if (!user) {
     return (
       <div>
+        <GlobalStyle />
         <Router>
           <Switch>
             <Route path="/register">
@@ -69,7 +77,7 @@ const App = () => {
             <Plans plans={plans} />
           </Route>
           <Route path="/">
-            <Home workouts={workouts} user={user} />
+            <Home handleClick={handleLike} workouts={workouts} user={user} />
             <Footer />
           </Route>
         </Switch>

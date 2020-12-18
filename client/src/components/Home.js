@@ -2,15 +2,16 @@ import React from 'react'
 import WorkoutForm from './WorkoutForm'
 import Togglable from './Togglable'
 import Workout from './Workout'
-import { HomeWrapper, Header, CenteredWrapper } from './styling'
+import { HomeWrapper, CenteredWrapper, PostsWrapper } from '../styling/wrappers'
+import { Header } from '../styling/mixins'
 
-const Home = ({ workouts, user }) => {
+const Home = ({ handleClick, workouts, user }) => {
   if (workouts.length === 0) {
     return (
       <CenteredWrapper>
         <h1> Your MuscleBud feed</h1>
         <p>It seems no one has logged a workout yet..</p>
-        <p>How about you go first?</p>
+        <p>You go first!</p>
         <Togglable buttonLabel="New workout">
           <WorkoutForm />
         </Togglable>
@@ -20,12 +21,17 @@ const Home = ({ workouts, user }) => {
   return (
     <>
       <HomeWrapper>
-        <div>
+        <PostsWrapper>
           <Header>Your MuscleBud feed</Header>
           {workouts.map((w) => (
-            <Workout key={w.id} workout={w} user={user} />
+            <Workout
+              handleLike={handleClick}
+              key={w.id}
+              workout={w}
+              user={user}
+            />
           ))}
-        </div>
+        </PostsWrapper>
         <Togglable buttonLabel="New workout">
           <WorkoutForm />
         </Togglable>

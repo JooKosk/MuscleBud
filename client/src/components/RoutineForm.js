@@ -1,8 +1,9 @@
 import React from 'react'
 import { Formik } from 'formik'
-import * as yup from 'yup'
 import planService from '../services/plans'
-import { FlexForm, MyTextField, SubmitButton } from './styling'
+import * as yup from 'yup'
+import { SubmitButton } from '../styling/mixins'
+import { FlexForm, MyTextField } from '../styling/forms'
 
 const validationSchema = yup.object({
   name: yup.string().required().max(25),

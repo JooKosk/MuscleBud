@@ -1,11 +1,18 @@
 import React from 'react'
-import { FooterWrapper } from './styling'
+import { FooterWrapper } from '../styling/wrappers'
 
 const Footer = () => {
   return (
     <FooterWrapper>
-      <p>MuscleBud workout log</p>
-      <p>Made by Joonas Koskela, 2020</p>
+      <div>
+        <h2>MuscleBud</h2>
+        <p>Joonas Koskela, 2020</p>
+      </div>
+      <div>
+        <h3>About</h3>
+        <p>About</p>
+        <p>Features</p>
+      </div>
     </FooterWrapper>
   )
 }

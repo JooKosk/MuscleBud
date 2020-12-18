@@ -9,7 +9,7 @@ import {
   Paper,
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { CenteredContainer } from './styling'
+import { CenteredContainer } from '../styling/wrappers'
 
 const Plans = ({ plans }) => {
   return (

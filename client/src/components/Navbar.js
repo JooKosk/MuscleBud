@@ -2,13 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { NavButton, DropDownLink } from '../styling/mixins'
 import {
   NavbarWrapper,
-  NavButton,
   DropDownContent,
   DropDownMenu,
-  DropDownLink,
-} from './styling'
+} from '../styling/wrappers'
 
 const Navbar = ({ setUser }) => {
   const logout = () => {

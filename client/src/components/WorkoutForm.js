@@ -6,8 +6,8 @@ import {
   MyBigTextField,
   MyDateField,
   MySelect,
-  LoginButton,
-} from './styling'
+} from '../styling/forms'
+import { LoginButton } from '../styling/mixins'
 import { create } from '../services/workouts'
 import { Formik } from 'formik'
 import * as yup from 'yup'
@@ -40,16 +40,18 @@ const workoutTimeToString = (endTime, startTime) => {
 
 const WorkoutForm = () => {
   const addWorkout = async (values) => {
-    const workoutPlan = {
+    console.log(values)
+    const workoutPost = {
       workoutName:
         values.workoutName.toLowerCase().charAt(0).toUpperCase() +
         values.workoutName.toLowerCase().slice(1),
       workoutType: values.workoutType,
       duration: values.duration,
       description: values.description,
+      likes: values.likes,
     }
     try {
-      await create(workoutPlan)
+      await create(workoutPost)
     } catch (e) {
       //catch error here
     }
@@ -64,8 +66,10 @@ const WorkoutForm = () => {
           endTime: '',
           description: '',
           duration: '',
+          likes: 0,
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
+          values.likes = 0
           console.log('submitting', values)
           let startTime = new Date(values.endTime).getTime()
           let endTime = new Date(values.startTime).getTime()

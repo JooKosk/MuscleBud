@@ -6,14 +6,15 @@ const workoutSchema = mongoose.Schema({
   date: { type: Date, required: true },
   duration: { type: String, required: true },
   description: { type: String },
+  likes: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  whoLiked: [
+  comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Comment',
     },
   ],
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SuccessWrapper, ErrorWrapper } from './styling'
+import { SuccessWrapper, ErrorWrapper } from '../styling/wrappers'
 
 const Alert = ({ message, err }) => {
   if (!message) {
