@@ -33,3 +33,15 @@ Backend:
 - Express
 - Password encryption with bcrypt
 ```
+
+### Starting
+
+To run the frontend:
+
+```
+1. Clone the repo
+2. cd to MuscleBud/client
+3. run npm install & start
+```
+
+The project will be hosted on Heroku when the build is finished.
